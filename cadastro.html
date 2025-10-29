@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Voluntariado - Projeto Nova Toca</title>
+    
+    <link rel="stylesheet" href="css/styler.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-group">
+            <img src="imagens/logo.jpeg" alt="Logotipo do Projeto Nova Toca">
+            <a href="index.html">
+                <h1>Nova Toca</h1>
+            </a>
+        </div>
+
+        <button id="menu-toggle" aria-label="Abrir menu">☰</button>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="projetos.html">Projetos</a></li> 
+                <li><a href="cadastro.html">Cadastro</a></li> 
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        
+        <section class="hero-section">
+            <h2>Seja um Voluntário do Projeto Nova Toca!</h2>
+            <p>Agradecemos o seu interesse em fazer parte da nossa equipe e ajudar os coelhos que mais precisam. No Projeto Nova Toca, cada voluntário faz a diferença!</p>
+        </section>
+
+        <div class="container">
+            <section>
+                <h2>Formulário de Voluntariado</h2> <form action="#" method="post" id="volunteer-form">
+                    
+                    <div id="message-container"></div>
+
+                    <fieldset>
+                        <legend>Informações Pessoais</legend>
+                        
+                        <div class="form-group">
+                            <label for="nome">Nome Completo:</label>
+                            <input type="text" id="nome" name="Nomecompleto" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nascimento">Data de Nascimento:</label>
+                            <input type="date" id="nascimento" name="data_de_nascimento" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="123.456.789-10" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tel">Telefone para contato:</label>
+                            <input type="tel" id="tel" name="telefone" placeholder="(11) 99999-8888" required>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="whatsapp" name="whatsapp" value="sim">
+                            <label for="whatsapp">Deseja receber mensagens no Whatsapp?</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Endereço</legend>
+                        
+                        <div class="form-group">
+                            <label for="cep">CEP:</label>
+                            <input type="text" id="cep" name="cep" placeholder="01001-000" required autocomplete="postal-code">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="logradouro">Rua:</label>
+                            <input type="text" id="logradouro" name="logradouro" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numero">Número:</label>
+                            <input type="text" name="numero" id="numero" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bairro">Bairro:</label>
+                            <input type="text" name="bairro" id="bairro" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cidade">Cidade:</label>
+                            <input type="text" name="cidade" id="cidade" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="uf">Estado (UF):</label>
+                            <input type="text" name="estado" id="uf" required maxlength="2">
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="folhetos" name="folhetos" value="sim">
+                            <label for="folhetos">Aceito receber folhetos da ONG (sem custos)</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Sua Disponibilidade</legend>
+                        
+                        <p class="form-instructions">Quais dias da semana você tem disponibilidade?</p>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="diasdasemana" name="Disponibilidade_dias[]" value="dias_dasemana">
+                            <label for="diasdasemana">Dias de Semana (segunda a sexta)</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="finaisdesemana" name="Disponibilidade_dias[]" value="finais_desemana">
+                            <label for="finaisdesemana">Finais de Semana (sábado ou domingo)</label>
+                        </div>
+
+                        <p class="form-instructions top-margin">Em quais períodos?</p>
+                        <div class="checkbox-group">
+                            <input type="radio" id="manha" name="periodo" value="manha">
+                            <label for="manha">Manhã</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="tarde" name="periodo" value="tarde">
+                            <label for="tarde">Tarde</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="noite" name="periodo" value="noite">
+                            <label for="noite">Noite</label>
+                        </div>
+                    </fieldset>
+                    
+                    <p style="text-align: center; margin-top: 2rem; color: #5a4c42; font-weight: 500;">
+                        Sua paixão pelos coelhos é a força do Projeto Nova Toca. Muito obrigado!
+                    </p>
+
+                    <button type="submit" class="cta-button full-width"><strong>Enviar Formulário</strong></button>
+                </form>
+            </section>
+        </div></main>
+
+    <footer id="contato">
+        <h2>Contato</h2>
+        <address class="contact-grid">
+            <p><strong>Endereço</strong><br>Rua Exemplo, 123 — Centro — Cidade/UF</p>
+            <p><strong>Telefone</strong><br><a href="tel:+5511999999999">(11) 99999-9999</a></p>
+            <p><strong>E-mail</strong><br><a href="mailto:contato@novatoca.org.br">contato@novatoca.org.br</a></p>
+        </address>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ONG Nova Toca. Todos os direitos reservados.</p>
+            <h5>Desenvolvido por Jônatas Braian</h5>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+    
+</body>
+</html>
