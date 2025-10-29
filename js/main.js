@@ -21,6 +21,53 @@ function isValidCPF(cpf) {
 }
 
 // ----------------------------------------------------
+// Módulo de Máscaras (Movido de mask.js para cá)
+// ----------------------------------------------------
+// Esta função será chamada DEPOIS que o template do formulário for carregado
+function initializeInputMasks() {
+    // Seleciona todos os inputs de CPF (dentro do template carregado)
+    const cpfInputs = document.querySelectorAll('input[name="cpf"]');
+    cpfInputs.forEach(function (input) {
+        input.addEventListener("input", function () {
+            let valor = this.value.replace(/\D/g, "");
+            if (valor.length > 11) valor = valor.slice(0, 11);
+            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+            valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            this.value = valor;
+        });
+    });
+
+    // Seleciona todos os inputs de telefone
+    const telefoneInputs = document.querySelectorAll('input[name="telefone"]');
+    telefoneInputs.forEach(function (input) {
+        input.addEventListener("input", function () {
+            let valor = this.value.replace(/\D/g, "");
+            if (valor.length > 11) valor = valor.slice(0, 11);
+            valor = valor.replace(/^(\d{2})(\d)/, "($1) $2");
+            if (valor.length > 10) {
+                valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
+            } else {
+                valor = valor.replace(/(\d{4})(\d)/, "$1-$2");
+            }
+            this.value = valor;
+        });
+    });
+
+    // Seleciona todos os inputs de CEP
+    const cepInputs = document.querySelectorAll('input[name="cep"]');
+    cepInputs.forEach(function (input) {
+        input.addEventListener("input", function () {
+            let valor = this.value.replace(/\D/g, "");
+            if (valor.length > 8) valor = valor.slice(0, 8);
+            valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
+            this.value = valor;
+        });
+    });
+}
+
+
+// ----------------------------------------------------
 // Módulo Principal do SPA e Interatividade
 // ----------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
@@ -44,23 +91,73 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // --- 1. Lógica do Menu Hambúrguer (Modular) ---
+    // --- 1. Lógica do Modo Escuro (NOVO) ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const storageKey = 'theme-preference';
+
+    const getInitialTheme = () => {
+        const storedTheme = localStorage.getItem(storageKey);
+        if (storedTheme) {
+            return storedTheme;
+        }
+        // Verifica a preferência do OS
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+
+    const setTheme = (theme) => {
+        document.body.classList.toggle('dark-mode', theme === 'dark');
+        localStorage.setItem(storageKey, theme);
+        
+        // Atualiza o botão para acessibilidade
+        if (theme === 'dark') {
+            themeToggle.setAttribute('aria-label', 'Ativar modo claro');
+            themeToggle.textContent = '☀️';
+        } else {
+            themeToggle.setAttribute('aria-label', 'Ativar modo escuro');
+            themeToggle.textContent = '🌙';
+        }
+    };
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            // Verifica qual é o tema ATUAL e inverte
+            const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    }
+    // Define o tema inicial no carregamento da página
+    setTheme(getInitialTheme());
+
+
+    // --- 2. Lógica do Menu Hambúrguer (ATUALIZADA) ---
     const menuToggle = document.getElementById('menu-toggle');
     const nav = document.querySelector('header nav');
 
     if (menuToggle && nav) {
         menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('is-active');
+            // Verifica se está ativo e atualiza ARIA
+            const isActive = nav.classList.toggle('is-active');
+            menuToggle.setAttribute('aria-expanded', isActive);
+            
+            if (isActive) {
+                menuToggle.setAttribute('aria-label', 'Fechar menu');
+            } else {
+                menuToggle.setAttribute('aria-label', 'Abrir menu');
+            }
         });
+
         // Fechar o menu ao clicar em um link
         nav.querySelectorAll('a').forEach(a => {
             a.addEventListener('click', () => {
                 nav.classList.remove('is-active');
+                // Reseta o botão
+                menuToggle.setAttribute('aria-expanded', false);
+                menuToggle.setAttribute('aria-label', 'Abrir menu');
             });
         });
     }
 
-    // --- 2. Sistema de Templates JavaScript (SPA Básico) ---
+    // --- 3. Sistema de Templates JavaScript (SPA Básico - ATUALIZADO) ---
     function renderPage(pageName) {
         const pageData = templates[pageName];
 
@@ -81,6 +178,13 @@ document.addEventListener("DOMContentLoaded", function () {
         
         // Adiciona a página ao histórico de navegação
         history.pushState({ page: pageName }, pageData.title, `#${pageName}`);
+
+        // **MELHORIA DE ACESSIBILIDADE (NOVO)**
+        // Move o foco para o título da nova página carregada
+        const newHeading = appContent.querySelector('h2');
+        if (newHeading) {
+            newHeading.focus();
+        }
 
         // O SPA recém-carregado pode ter formulários, então religamos os listeners
         if (pageName === 'cadastro') {
@@ -103,11 +207,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Lógica para o botão de voltar do navegador (SPA)
     window.addEventListener('popstate', (e) => {
-        const page = e.state ? e.state.page : 'home';
-        // A função renderPage precisa ser chamada, mas sem atualizar o history
-        // Uma implementação mais avançada faria isso, mas para o requisito básico, o renderPage simples é suficiente.
-        // Como o popstate já define o URL, vamos apenas forçar o reload do conteúdo.
-        // Para simplificar no requisito de SPA Básico:
         const hash = window.location.hash.substring(1) || 'home';
         renderPage(hash); // Re-renderiza a página correta
     });
@@ -117,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
     renderPage(initialHash);
 
 
-    // --- 3. Script de Validação de Formulário e ViaCEP (Modular) ---
+    // --- 4. Script de Validação de Formulário e ViaCEP (ATUALIZADO) ---
     
     // Esta função será chamada após o DOM ser manipulado pelo SPA
     function initializeFormListeners() {
@@ -129,8 +228,11 @@ document.addEventListener("DOMContentLoaded", function () {
         
         if (!form || !messageContainer) return;
 
-        // 3.1. Auto-preenchimento do CEP (ViaCEP)
-        // O código da máscara de CEP está no mask.js e deve ser recarregado/re-bindado
+        // **CHAMADA DAS MÁSCARAS (NOVO)**
+        // Aplica as máscaras de CPF, Tel e CEP aos inputs recém-carregados
+        initializeInputMasks();
+
+        // 4.1. Auto-preenchimento do CEP (ViaCEP)
         if (cepInput) {
             // Adiciona o listener para o fetch do ViaCEP
             cepInput.addEventListener('keyup', (e) => {
@@ -159,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // 3.2. Validação de Formulário (com aviso de preenchimento incorreto)
+        // 4.2. Validação de Formulário (com aviso de preenchimento incorreto)
         form.addEventListener('submit', (e) => {
             e.preventDefault(); 
             messageContainer.className = '';
