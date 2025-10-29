@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Nova Toca - Início</title> 
+    <link rel="stylesheet" href="css/styler.css">
+</head>
+<body>
+
+<header>
+    
+    <div class="logo-group">
+        <img src="imagens/logo.jpeg" alt="Logotipo do Projeto Nova Toca">
+        <a href="#home" data-page="home"> 
+            <h1>Nova Toca</h1>
+        </a>
+    </div>
+    
+    <button id="theme-toggle" aria-label="Ativar modo escuro" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">🌙</button>
+
+    <button id="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+    
+    <nav id="main-nav">
+        <ul>
+            <li><a href="#home" data-page="home">Inicio</a></li>
+            <li><a href="#projetos" data-page="projetos">Projetos</a></li>
+            <li><a href="#cadastro" data-page="cadastro">Cadastro</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="app-content">
+    <section class="hero-section">
+        <h2 tabindex="-1">Uma nova toca segura para cada coelho resgatado.</h2>
+        <p>Seu apoio cria novos começos para coelhos.</p>
+        <a href="#cadastro" data-page="cadastro" class="cta-button">Seja Voluntário!</a>
+    </section>
+
+    <div class="container">
+        <section>
+            <h2>Nossos números de impacto</h2>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <h3>500+</h3>
+                    <p>Coelhos Resgatados</p>
+                </div>
+                <div class="impact-item">
+                    <h3>420+</h3>
+                    <p>Adoções Realizadas</p>
+                </div>
+                <div class="impact-item">
+                    <h3>300+</h3>
+                    <p>Depoimentos Felizes</p>
+                </div>
+                <div class="impact-item">
+                    <h3>15+</h3>
+                    <p>Parceiros Veterinários</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Conheça nossos trabalhos</h2>
+            <div class="work-grid">
+                <article class="work-card">
+                    <img src="imagens/nossos-projetos.jpg" alt="Pessoas cuidando de coelhos">
+                    <div class="work-card-content">
+                        <h3>Nossos Projetos</h3>
+                        <p>Descubra nossas iniciativas de resgate, reabilitação e adoção consciente.</p>
+                        <a href="#projetos" data-page="projetos" class="cta-button-small">Ver projetos</a>
+                    </div>
+                </article>
+
+                <article class="work-card">
+                    <img src="imagens/doacao-imagem.png" alt="Ilustração de doação">
+                    <div class="work-card-content">
+                        <h3>Faça uma Doação</h3>
+                        <p>Sua contribuição salva vidas e ajuda a manter nosso abrigo funcionando.</p>
+                        <a href="#cadastro" data-page="cadastro" class="cta-button-small">Saiba como</a>
+                    </div>
+                </article>
+
+                <article class="work-card">
+                    <img src="imagens/sejavoluntario.jpg" alt="Pessoa cuidando de coelhos">
+                    <div class="work-card-content">
+                        <h3>Seja Voluntário</h3>
+                        <p>Doe seu tempo e amor. Os orelhudos agradecem imensamente!</p>
+                        <a href="#cadastro" data-page="cadastro" class="cta-button-small">Seja Voluntário</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+    
+    </main>
+
+<footer id="contato">
+    <h2>Contato</h2>
+    <address class="contact-grid">
+        <p><strong>Endereço</strong><br>Rua Exemplo, 123 — Centro — Cidade/UF</p>
+        <p><strong>Telefone</strong><br><a href="tel:+5511999999999">(11) 99999-9999</a></p>
+        <p><strong>E-mail</strong><br><a href="mailto:contato@novatoca.org.br">contato@novatoca.org.br</a></p>
+    </address>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 ONG Nova Toca. Todos os direitos reservados.</p>
+        <h5>Desenvolvido por Jônatas Braian</h5>
+    </div>
+</footer>
+
+<template id="projetos-template">
+    <section class="hero-section">
+        <h2 tabindex="-1">Nossos Projetos</h2>
+        <p>Conheça as iniciativas da Nova Toca para garantir uma vida digna e feliz para todos os nossos orelhudos.</p>
+    </section>
+
+    <div class="container">
+        <section class="project-item">
+            <h3>Projeto Resgate e Reabilitação</h3>
+            <div class="project-content">
+                <img src="imagens/resgate-coelho.png" alt="Coelho sendo resgatado" width="320">
+                <div class="project-text">
+                    <p>Resgatamos coelhos de situações de maus-tratos, abandono e risco. Na Nova Toca, eles recebem cuidados veterinários imediatos, alimentação adequada, socialização e todo o carinho necessário para se recuperarem física e emocionalmente.</p>
+                    <p>Cada coelho passa por um período de quarentena e reabilitação antes de ser considerado pronto para adoção.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-item">
+            <h3>Programa de Adoção Consciente</h3>
+            <div class="project-content">
+                <img src="imagens/adocao.jpg" alt="Família feliz adotando um coelho" width="320">
+                <div class="project-text">
+                    <p>Não basta adotar, é preciso ser consciente. Nosso programa de adoção foca em encontrar lares permanentes e responsáveis. Realizamos entrevistas detalhadas e orientamos as futuras famílias sobre manejo, espaço, alimentação e os custos de ter um coelho.</p>
+                    <p>Oferecemos suporte pós-adoção para garantir que tanto o coelho quanto a família estejam felizes e bem adaptados.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="project-item">
+            <h3>Educação e Conscientização</h3>
+            <div class="project-content">
+                <img src="imagens/educacao.jpg" alt="Pessoa lendo material educativo sobre coelhos" width="320">
+                <div class="project-text">
+                    <p>Acreditamos que a informação é a chave para combater o abandono. Promovemos palestras, criamos materiais educativos e atuamos nas redes sociais para desmistificar mitos e ensinar sobre as reais necessidades dos coelhos.</p>
+                    <p>Coelhos não são "brinquedos", exigem cuidados específicos e não devem ser comprados por impulso, especialmente na Páscoa.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Faça Parte da Mudança!</h2>
+            <p>Gostou dos nossos projetos? Você pode nos ajudar a continuar esse trabalho!</p>
+            <a href="#cadastro" data-page="cadastro" class="cta-button">Seja Voluntário</a>
+        </section>
+
+    </div>
+</template>
+
+<template id="cadastro-template">
+    <section class="hero-section">
+        <h2 tabindex="-1">Seja um Voluntário do Projeto Nova Toca!</h2>
+        <p>Agradecemos o seu interesse em fazer parte da nossa equipe e ajudar os coelhos que mais precisam. No Projeto Nova Toca, cada voluntário faz a diferença!</p>
+    </section>
+
+    <div class="container">
+        <section>
+            <h2>Formulário de Voluntariado</h2> 
+            <form action="#" method="post" id="volunteer-form">
+                
+                <div id="message-container" role="alert" aria-live="assertive"></div>
+
+                <fieldset>
+                    <legend>Informações Pessoais</legend>
+                    
+                    <div class="form-group">
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" name="Nomecompleto" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nascimento">Data de Nascimento:</label>
+                        <input type="date" id="nascimento" name="data_de_nascimento" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cpf">CPF:</label>
+                        <input type="text" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="123.456.789-10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tel">Telefone para contato:</label>
+                        <input type="tel" id="tel" name="telefone" placeholder="(11) 99999-8888" required>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="whatsapp" name="whatsapp" value="sim">
+                        <label for="whatsapp">Deseja receber mensagens no Whatsapp?</label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Endereço</legend>
+                    
+                    <div class="form-group">
+                        <label for="cep">CEP:</label>
+                        <input type="text" id="cep" name="cep" placeholder="01001-000" required autocomplete="postal-code">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logradouro">Rua:</label>
+                        <input type="text" id="logradouro" name="logradouro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numero">Número:</label>
+                        <input type="text" name="numero" id="numero" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bairro">Bairro:</label>
+                        <input type="text" name="bairro" id="bairro" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" name="cidade" id="cidade" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="uf">Estado (UF):</label>
+                        <input type="text" name="estado" id="uf" required maxlength="2">
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="folhetos" name="folhetos" value="sim">
+                        <label for="folhetos">Aceito receber folhetos da ONG (sem custos)</label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Sua Disponibilidade</legend>
+                    
+                    <p class="form-instructions">Quais dias da semana você tem disponibilidade?</p>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="diasdasemana" name="Disponibilidade_dias[]" value="dias_dasemana">
+                        <label for="diasdasemana">Dias de Semana (segunda a sexta)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="finaisdesemana" name="Disponibilidade_dias[]" value="finais_desemana">
+                        <label for="finaisdesemana">Finais de Semana (sábado ou domingo)</label>
+                    </div>
+
+                    <p class="form-instructions top-margin">Em quais períodos?</p>
+                    <div class="checkbox-group">
+                        <input type="radio" id="manha" name="periodo" value="manha" required>
+                        <label for="manha">Manhã</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="radio" id="tarde" name="periodo" value="tarde">
+                        <label for="tarde">Tarde</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="radio" id="noite" name="periodo" value="noite">
+                        <label for="noite">Noite</label>
+                    </div>
+                </fieldset>
+                
+                <p style="text-align: center; margin-top: 2rem; color: #5a4c42; font-weight: 500;">
+                    Sua paixão pelos coelhos é a força do Projeto Nova Toca. Muito obrigado!
+                </p>
+
+                <button type="submit" class="cta-button full-width"><strong>Enviar Formulário</strong></button>
+            </form>
+        </section>
+    </div>
+</template>
+
+<script src="js/mask.js"></script> 
+<script src="js/main.js"></script>
+
+</body>
+</html>

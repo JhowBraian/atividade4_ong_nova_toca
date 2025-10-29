@@ -1,0 +1,709 @@
+/*
+ * === STYLER.CSS - PROJETO NOVA TOCA ===
+ *
+ * 1. Reset e Globais
+ * 2. Design System (Variáveis)
+ * 2.1. Dark Mode Theme (Acessibilidade)
+ * 3. Estrutura e Layout (Grid/Flex)
+ * 4. Header e Navegação (Menu Hambúrguer)
+ * 5. Componentes (Botões, Cards, Hero)
+ * 6. Estilos de Formulário
+ * 7. Estilos do Rodapé
+ * 8. Media Queries (Responsividade)
+*/
+
+/* --- 1. Reset e Globais --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base para 'rem' */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-neutral-lightest);
+    color: var(--color-neutral-dark);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1; /* Garante que o main ocupe o espaço e empurre o footer para baixo */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--color-primary-dark);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5 {
+    margin-bottom: var(--space-sm);
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+/* Adicionado para Acessibilidade (Foco Visível) */
+a:focus {
+    outline: 3px solid var(--color-primary-dark);
+    outline-offset: 2px;
+    border-radius: var(--base-border-radius);
+}
+
+
+/* --- 2. Design System (Variáveis) --- */
+:root {
+    /* Paleta de Cores (Req: min 8) */
+    --color-primary: #8d6e63;         /* Marrom coelho (principal) */
+    --color-primary-dark: #5f4339;   /* Marrom escuro (textos, links) */
+    --color-primary-light: #be9c91;  /* Marrom claro */
+    --color-secondary: #a5d6a7;      /* Verde claro (natureza) */
+    --color-secondary-dark: #558b2f; /* Verde escuro */
+    --color-accent: #ff8a65;         /* Laranja (cenoura, CTA) */
+    --color-neutral-dark: #372e29;   /* Quase preto (texto) */
+    --color-neutral-medium: #d7ccc8; /* Cinza/bege (bordas) */
+    --color-neutral-light: #f5f5f5;  /* Fundo cinza claro */
+    --color-neutral-lightest: #ffffff;/* Fundo branco (cards) */
+    --color-feedback-success: #4caf50;
+    --color-feedback-error: #f44336;
+
+    /* Tipografia (Req: min 5) */
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 1rem;     /* 16px */
+    --font-size-md: 1.25rem;    /* 20px */
+    --font-size-lg: 1.5rem;     /* 24px */
+    --font-size-xl: 2.25rem;    /* 36px */
+    --font-size-xxl: 3rem;      /* 48px */
+
+    /* Espaçamento Modular (Req: 8, 16, 24, 32, 48, 64) */
+    --space-xs: 0.5rem;   /* 8px */
+    --space-sm: 1rem;     /* 16px */
+    --space-md: 1.5rem;   /* 24px */
+    --space-lg: 2rem;     /* 32px */
+    --space-xl: 3rem;     /* 48px */
+    --space-xxl: 4rem;    /* 64px */
+    
+    /* Outros */
+    --base-border-radius: 8px;
+    --base-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --base-transition: all 0.3s ease-in-out;
+}
+
+/* --- 2.1. Dark Mode Theme (Acessibilidade) --- */
+body.dark-mode {
+    /* Paleta de Cores Invertida */
+    --color-primary: #8d6e63;        /* Mantém o marrom principal */
+    --color-primary-dark: #be9c91;   /* Marrom claro (para texto/links) */
+    --color-primary-light: #5f4339;  /* Marrom escuro (para fundos) */
+    
+    --color-secondary: #558b2f;      /* Verde escuro */
+    --color-secondary-dark: #a5d6a7; /* Verde claro */
+    
+    --color-accent: #ff8a65;        /* Laranja (mantém) */
+
+    /* Neutros Invertidos */
+    --color-neutral-dark: #f5f5f5;      /* Texto principal (claro) */
+    --color-neutral-medium: #5a4c42;   /* Bordas / Divisores */
+    --color-neutral-light: #372e29;     /* Fundo de cards/forms */
+    --color-neutral-lightest: #1c1c1e;  /* Fundo principal (quase preto) */
+    
+    /* Sombra mais sutil no escuro */
+    --base-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+}
+
+
+/* Hierarquia de Tipografia */
+h1 { font-size: var(--font-size-xl); color: var(--color-primary-dark); }
+h2 { font-size: var(--font-size-lg); color: var(--color-neutral-dark); }
+h3 { font-size: var(--font-size-md); color: var(--color-primary-dark); }
+p { font-size: var(--font-size-base); margin-bottom: var(--space-sm); }
+
+
+/* --- 3. Estrutura e Layout (Grid/Flex) --- */
+/* Classe principal do container */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+}
+
+/* Sistema de Grid (Req: 12 colunas)
+   Usaremos Grid para os componentes internos em vez de classes de utilidade */
+
+/* Layout do Index */
+.impact-grid {
+    display: grid;
+    /* 12 colunas: cada item ocupa 3 colunas (12/4 = 3) */
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-md);
+}
+
+.impact-item {
+    grid-column: span 3; /* Ocupa 3 das 12 colunas */
+    background: var(--color-neutral-lightest);
+    padding: var(--space-md);
+    border-radius: var(--base-border-radius);
+    text-align: center;
+    box-shadow: var(--base-box-shadow);
+}
+.impact-item h3 {
+    font-size: var(--font-size-xl);
+    color: var(--color-accent);
+}
+
+.work-grid {
+    display: grid;
+    /* 12 colunas: cada item ocupa 4 colunas (12/3 = 4) */
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-md);
+}
+
+.work-card {
+    grid-column: span 4; /* Ocupa 4 das 12 colunas */
+}
+
+/* Layout de Projetos */
+.project-item {
+    margin-bottom: var(--space-xl);
+    background: var(--color-neutral-lightest);
+    padding: var(--space-lg);
+    border-radius: var(--base-border-radius);
+    box-shadow: var(--base-box-shadow);
+}
+
+.project-content {
+    display: grid;
+    /* 12 colunas: img (4) + texto (8) */
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-lg);
+    align-items: center;
+}
+
+.project-content img {
+    grid-column: span 4;
+    border-radius: var(--base-border-radius);
+}
+
+.project-content .project-text {
+    grid-column: span 8;
+}
+
+
+/* --- 4. Header e Navegação (Menu Hambúrguer) --- */
+header {
+    width: 100%;
+    padding: var(--space-sm) 5%;
+    background: var(--color-neutral-lightest);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex; /* Req: Flexbox */
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+.logo-group img {
+    width: 100px; /* Tamanho reduzido para o header */
+    height: auto;
+}
+.logo-group h1 {
+    font-size: var(--font-size-lg);
+    margin: 0;
+    color: var(--color-primary-dark);
+}
+.logo-group a {
+    text-decoration: none;
+}
+
+header nav ul {
+    display: flex;
+    gap: var(--space-md);
+    list-style: none;
+}
+
+header nav a {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    text-decoration: none;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--base-border-radius);
+    transition: var(--base-transition);
+}
+
+header nav a:hover,
+header nav a.active { /* Classe 'active' pode ser adicionada via JS se desejar */
+    background-color: var(--color-primary-light);
+    color: var(--color-neutral-dark);
+    text-decoration: none;
+}
+
+/* Botão do Menu Hambúrguer (Req) - Inicialmente escondido */
+#menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-xl);
+    color: var(--color-primary-dark);
+}
+
+/* --- Dark Mode Overrides (Header) --- */
+body.dark-mode header {
+    background: var(--color-neutral-light);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+body.dark-mode header nav {
+    /* Fundo para o menu hambúrguer mobile */
+    background: var(--color-neutral-light);
+}
+
+
+/* --- 5. Componentes (Botões, Cards, Hero) --- */
+/* Seção Herói (Comum a todas as páginas) */
+.hero-section {
+    padding: var(--space-xxl) var(--space-lg);
+    /* Imagem de fundo genérica - substitua se tiver uma */
+    background-color: var(--color-primary);
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://via.placeholder.com/1500x400.png?text=Imagem+Herói+Coelhos');
+    background-size: cover;
+    background-position: center;
+    color: var(--color-neutral-lightest);
+    text-align: center;
+    border-bottom: 5px solid var(--color-accent);
+}
+.hero-section h2 {
+    font-size: var(--font-size-xxl);
+    color: var(--color-neutral-lightest);
+}
+.hero-section p {
+    font-size: var(--font-size-md);
+    max-width: 700px;
+    margin: 0 auto var(--space-lg) auto;
+}
+
+/* Botões (Req: estados) */
+.cta-button, .cta-button-small {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-neutral-dark); /* <-- ALTERAÇÃO DE ACESSIBILIDADE (Contraste) */
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--base-border-radius);
+    cursor: pointer;
+    transition: var(--base-transition);
+    text-align: center;
+}
+.cta-button {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--font-size-base);
+}
+.cta-button-small {
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--font-size-sm);
+}
+
+/* Estados do Botão */
+.cta-button:hover, .cta-button-small:hover {
+    background-color: #ff7043; /* Laranja mais escuro */
+    color: var(--color-neutral-dark); /* <-- ALTERAÇÃO DE ACESSIBILIDADE (Contraste) */
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.cta-button:focus, .cta-button-small:focus {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+.cta-button:active, .cta-button-small:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+.cta-button:disabled, .cta-button-small:disabled {
+    background-color: var(--color-neutral-medium);
+    cursor: not-allowed;
+}
+
+/* Cards (Req: .work-card) */
+.work-card {
+    background: var(--color-neutral-lightest);
+    border-radius: var(--base-border-radius);
+    box-shadow: var(--base-box-shadow);
+    overflow: hidden; /* Garante que a imagem se ajuste ao radius */
+    transition: var(--base-transition);
+}
+.work-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+.work-card img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+.work-card-content {
+    padding: var(--space-md);
+}
+
+/* CTA Section (Projetos) */
+.cta-section {
+    text-align: center;
+    background: var(--color-secondary);
+    padding: var(--space-xl);
+    border-radius: var(--base-border-radius);
+}
+
+/* --- Dark Mode Overrides (Componentes) --- */
+body.dark-mode .hero-section {
+     /* Mantém o gradiente, mas a cor de fundo sólida muda */
+     background-color: var(--color-primary-light);
+}
+body.dark-mode .hero-section h2 {
+    color: var(--color-neutral-lightest); /* Garante que fique branco */
+}
+body.dark-mode .work-card {
+    background: var(--color-neutral-light);
+    box-shadow: var(--base-box-shadow);
+}
+body.dark-mode .cta-section {
+    background: var(--color-secondary);
+    color: var(--color-neutral-dark); /* Garante texto escuro no fundo verde */
+}
+body.dark-mode .project-item {
+    background: var(--color-neutral-light);
+}
+body.dark-mode .impact-item {
+    background: var(--color-neutral-light);
+}
+
+
+/* --- 6. Estilos de Formulário (Req) --- */
+form {
+    background: var(--color-neutral-lightest);
+    padding: var(--space-lg);
+    border-radius: var(--base-border-radius);
+    box-shadow: var(--base-box-shadow);
+    max-width: 800px;
+    margin: 0 auto;
+}
+fieldset {
+    border: 1px solid var(--color-neutral-medium);
+    border-radius: var(--base-border-radius);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+legend {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    padding: 0 var(--space-xs);
+    margin-left: var(--space-sm);
+}
+.form-group {
+    margin-bottom: var(--space-sm);
+}
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"] {
+    width: 100%;
+    padding: var(--space-sm);
+    font-size: var(--font-size-base);
+    border: 1px solid var(--color-neutral-medium);
+    border-radius: var(--base-border-radius);
+}
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.3);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+}
+.checkbox-group input {
+    margin-top: -2px;
+}
+.form-instructions {
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-dark);
+    margin-bottom: var(--space-xs);
+}
+.top-margin {
+    margin-top: var(--space-md);
+}
+.full-width {
+    width: 100%;
+}
+
+/* Validação Visual (Req) */
+.form-group input:invalid:not(:placeholder-shown) {
+    border-color: var(--color-feedback-error);
+    background-color: #fff8f8;
+}
+.form-group input:valid:not(:placeholder-shown) {
+    border-color: var(--color-feedback-success);
+}
+
+/* Componente de Feedback (Req) */
+#message-container {
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    border-radius: var(--base-border-radius);
+    font-weight: 600;
+    display: none; /* Oculto por padrão */
+}
+#message-container.success {
+    display: block;
+    background-color: var(--color-secondary);
+    color: var(--color-neutral-dark);
+}
+#message-container.error {
+    display: block;
+    background-color: #ffcdd2;
+    color: var(--color-feedback-error);
+}
+
+/* --- Dark Mode Overrides (Formulário) --- */
+body.dark-mode form {
+    background: var(--color-neutral-light);
+}
+body.dark-mode fieldset {
+    border-color: var(--color-neutral-medium);
+}
+body.dark-mode .form-group label,
+body.dark-mode .form-instructions,
+body.dark-mode .checkbox-group label {
+    color: var(--color-neutral-dark); /* Garante que os labels sejam claros */
+}
+body.dark-mode .form-group input[type="text"],
+body.dark-mode .form-group input[type="email"],
+body.dark-mode .form-group input[type="tel"],
+body.dark-mode .form-group input[type="date"] {
+    background-color: var(--color-neutral-lightest);
+    color: var(--color-neutral-dark); /* Texto claro */
+    border-color: var(--color-neutral-medium);
+}
+body.dark-mode .form-group input:focus {
+    /* Ajusta o foco para o dark mode */
+    box-shadow: 0 0 0 3px rgba(190, 156, 145, 0.4); 
+}
+/* Validação no dark mode */
+body.dark-mode .form-group input:invalid:not(:placeholder-shown) {
+    background-color: #4d1a1a; /* Fundo avermelhado escuro */
+    border-color: var(--color-feedback-error);
+}
+body.dark-mode .form-group input:valid:not(:placeholder-shown) {
+    background-color: #1a4d1a; /* Fundo esverdeado escuro */
+    border-color: var(--color-feedback-success);
+}
+/* Mensagens de feedback */
+body.dark-mode #message-container.success {
+    background-color: var(--color-secondary-dark); /* Verde mais claro */
+    color: var(--color-neutral-dark); /* Texto escuro */
+}
+body.dark-mode #message-container.error {
+    background-color: #ffcdd2; /* Mantém rosa claro */
+    color: var(--color-feedback-error); /* Mantém texto escuro */
+}
+
+
+/* --- 7. Estilos do Rodapé --- */
+footer {
+    background-color: var(--color-neutral-dark);
+    color: var(--color-neutral-light);
+    padding: var(--space-xl) 5%;
+    margin-top: var(--space-xl);
+}
+footer h2 {
+    color: var(--color-neutral-lightest);
+    text-align: center;
+}
+footer a {
+    color: var(--color-secondary);
+}
+.contact-grid {
+    display: grid;
+    /* 12 colunas: 3 itens de 4 colunas */
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-lg);
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+.contact-grid p {
+    grid-column: span 4;
+}
+.footer-bottom {
+    border-top: 1px solid var(--color-neutral-medium);
+    text-align: center;
+    padding-top: var(--space-md);
+    margin-top: var(--space-lg);
+    font-size: var(--font-size-sm);
+}
+.footer-bottom h5 {
+    font-weight: 400;
+    color: var(--color-neutral-medium);
+}
+
+/* --- Dark Mode Overrides (Rodapé) --- */
+/* O footer já é escuro, então forçamos ele a *ignorar* as variáveis 
+   do dark-mode usando as cores originais (hardcoded) */
+body.dark-mode footer {
+    background-color: #372e29;
+    color: #f5f5f5;
+}
+body.dark-mode footer h2 {
+    color: #ffffff;
+}
+body.dark-mode footer a {
+    color: #a5d6a7;
+}
+body.dark-mode .footer-bottom {
+    border-top-color: #d7ccc8;
+}
+body.dark-mode .footer-bottom h5 {
+    color: #d7ccc8;
+}
+
+
+/* --- 8. Media Queries (Responsividade) --- */
+/* (Req: min 5 breakpoints) */
+
+/* BP 1: Laptops grandes (1200px) */
+@media (max-width: 1200px) {
+    .container {
+        width: 95%;
+    }
+}
+
+/* BP 2: Tablets (992px) */
+@media (max-width: 992px) {
+    /* Ajusta grids de 12 para 8 colunas */
+    .impact-item {
+        grid-column: span 6; /* 2 colunas no total (8/2=4) -> Erro, (12/2 = 6) */
+    }
+    .work-card {
+        grid-column: span 6;
+    }
+    .project-content {
+        /* Imagem (12) + Texto (12) */
+        grid-template-columns: 1fr; /* Stacking */
+    }
+    .project-content img {
+        grid-column: span 12;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .project-content .project-text {
+        grid-column: span 12;
+    }
+    .contact-grid p {
+        grid-column: span 12; /* Stack */
+    }
+}
+
+/* BP 3: Tablets (768px) - Menu Hambúrguer (Req) */
+@media (max-width: 768px) {
+    h1 { font-size: var(--font-size-lg); }
+    h2 { font-size: var(--font-size-md); }
+    .hero-section h2 { font-size: var(--font-size-xl); }
+    
+    /* Ativa o menu hambúrguer */
+    #menu-toggle {
+        display: block; /* Mostra o botão */
+    }
+    
+    header nav {
+        display: none; /* Esconde a navegação */
+        position: absolute;
+        top: 100%; /* Logo abaixo do header */
+        left: 0;
+        width: 100%;
+        background: var(--color-neutral-lightest);
+        box-shadow: var(--base-box-shadow);
+    }
+    
+    header nav.is-active {
+        display: block; /* Mostra o menu ao clicar */
+    }
+    
+    header nav ul {
+        flex-direction: column;
+        padding: var(--space-md);
+    }
+    header nav ul li {
+        width: 100%;
+    }
+    header nav a {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+/* BP 4: Celulares Grandes (576px) */
+@media (max-width: 576px) {
+    .impact-item {
+        grid-column: span 12; /* 1 coluna */
+    }
+    .work-card {
+        grid-column: span 12; /* 1 coluna */
+    }
+    .logo-group h1 {
+        display: none; /* Esconde o H1 do logo para economizar espaço */
+    }
+    form {
+        padding: var(--space-md);
+    }
+}
+
+/* BP 5: Celulares Pequenos (480px) */
+@media (max-width: 480px) {
+    .hero-section {
+        padding: var(--space-xl) var(--space-sm);
+    }
+    .hero-section h2 {
+        font-size: var(--font-size-lg);
+    }
+    .hero-section p {
+        font-size: var(--font-size-base);
+    }
+}
