@@ -1,58 +1,122 @@
-# 🐰 Projeto Nova Toca – Entrega III: Interatividade e SPA
+# Projeto Nova Toca - ONG Fictícia
+## Website de ONG Fictícia para Adoção de Coelhos
 
-### Descrição
+![License](https://img.shields.io/badge/license-MIT-blue.svg) 
+![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)
 
-Nesta terceira entrega, o site da **ONG Nova Toca** (Resgate de Coelhos) evoluiu de uma interface estática para uma **Aplicação de Página Única (SPA) dinâmica e interativa**, utilizando **JavaScript avançado**.
+Este projeto é um site SPA (Single Page Application) desenvolvido como parte da atividade prática da faculdade de Análise e Desenvolvimento de Sistemas (ADS).
 
-O objetivo principal foi transformar a navegação em uma **SPA funcional**, implementando um **Sistema de Templates JavaScript** e validação robusta de formulários, simulando uma aplicação web real e atendendo integralmente às exigências da atividade.
+O projeto simula o website de uma ONG fictícia ("Nova Toca") dedicada ao resgate e adoção de coelhos, com foco em profissionalismo, acessibilidade e boas práticas de desenvolvimento web.
 
-* **Estrutura SPA:** O projeto foi consolidado em um único arquivo `index.html`. Os arquivos `projetos.html` e `cadastro.html` foram **removidos**, pois seu conteúdo é carregado via templates JS.
+> ### 🔗 **Acesse o site:** [https://jhowbraian.github.io/atividade4_ong_nova_toca/](https://jhowbraian.github.io/atividade4_ong_nova_toca/)
 
-### Acesse o Site
+---
 
-Você pode acessar a versão publicada no GitHub Pages:
+## 📋 Tabela de Conteúdos
 
-https://jhowbraian.github.io/atividade4_ong_nova_toca/
+* [Sobre o Projeto](#-sobre-o-projeto)
+* [Funcionalidades Principais](#-funcionalidades-principais)
+* [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+* [Como Executar o Projeto Localmente](#-como-executar-o-projeto-localmente)
+* [Requisitos da Atividade IV (Acessibilidade e Otimização)](#-requisitos-da-atividade-iv-atendidos)
+* [Autor](#-autor)
+* [Licença](#-licença)
 
-### Objetivos
+---
 
-* Transformar a interface estática em uma aplicação web dinâmica.
-* Demonstrar domínio de manipulação do DOM e eventos.
-* **Implementar SPA básico e Templates JavaScript.**
-* **Validar formulários com verificação de consistência de dados** e aviso ao usuário.
-* Organizar código JavaScript de forma modular.
+## 📖 Sobre o Projeto
 
-### Tecnologias
+O **Projeto Nova Toca** é um site institucional completo construído como uma **SPA (Single Page Application)**, utilizando HTML5, CSS3 e JavaScript puro. A navegação entre as páginas "Início", "Projetos" e "Cadastro" ocorre de forma dinâmica, sem recarregar a página, através da manipulação do DOM e da History API.
 
-* **HTML5** (Com o uso estratégico da tag `<template>`)
-* **CSS3** (Grid, Flexbox, Variáveis CSS, Responsividade)
-* **JavaScript ES6+** (SPA, Templates, DOM, `fetch`, Validação, Eventos)
-* **APIs:** ViaCEP (Para preenchimento automático de endereço)
+O objetivo foi criar uma experiência de usuário fluida, moderna e, acima de tudo, **acessível** a todos os públicos, seguindo as diretrizes da WCAG 2.1.
 
-### Layout, Responsividade e SPA
+## ✨ Funcionalidades Principais
 
-* **Design System:** Uso de **Variáveis CSS** no `:root` para cores e espaçamento.
-* **Layout:** Combinação de **Grid Layout** (estrutura de 12 colunas, grids de impacto e work) e **Flexbox** (componentes).
-* **5 Breakpoints:** O layout é otimizado para as seguintes larguras:
-    * `1200px` → desktop médio
-    * `992px` → tablet horizontal
-    * `768px` → tablet vertical (ativa menu hambúrguer)
-    * `576px` → celular grande
-    * `480px` → celular pequeno
-* **SPA Funcional:** Navegação instantânea e fluida entre as seções, com o conteúdo de cada página carregado via `js/main.js` a partir dos templates.
+* **🌐 Single Page Application (SPA):** Navegação dinâmica entre as páginas (Início, Projetos, Cadastro) sem recarregamento, utilizando JavaScript puro e a History API.
+* **🎨 Tema Escuro (Dark Mode):** Alternador de tema (claro/escuro) com:
+    * Salvamento da preferência do usuário no `localStorage`.
+    * Detecção automática da preferência do sistema (`prefers-color-scheme`).
+* **📱 Design Responsivo (Mobile-First):** Layout 100% adaptável para todos os tamanhos de tela, de celulares a desktops, utilizando CSS Grid e Flexbox.
+* **✅ Formulário de Voluntariado Interativo:**
+    * **Validação de Dados:** Verificação de campos obrigatórios e validação de consistência de CPF (algoritmo).
+    * **Integração com API:** Preenchimento automático de endereço via API (`ViaCEP`) a partir do CEP.
+    * **Máscaras de Input:** Formatação automática em tempo real para campos de CPF, CEP e Telefone.
+    * **Feedback Acessível:** Mensagens de sucesso ou erro apresentadas de forma acessível para leitores de tela (`role="alert"`).
 
-### Funcionalidades Implementadas
+## 🚀 Tecnologias Utilizadas
 
-* **Sistema de Templates JS:** O `main.js` utiliza os templates definidos no `index.html` para renderizar o conteúdo da seção `<main>`, garantindo uma transição rápida e eficiente.
-* **Validação de Formulários (Avançada):**
-    * Validação de campos obrigatórios nativa do HTML5.
-    * **Verificação de Consistência de CPF:** Implementação de função JavaScript para validação lógica do número de CPF.
-    * **Autocompletar Endereço:** Integração com ViaCEP via `fetch` a partir do campo CEP.
-    * Mensagens de sucesso e **avisos de erro específicos** exibidas dinamicamente no `#message-container`.
-* **Scripts Modularizados:** O código foi separado em:
-    * `js/main.js` (Controlador do SPA, ViaCEP, Validação).
-    * `js/mask.js` (Máscaras de CPF, Telefone e CEP).
+* **HTML5 (Semântico):** Estruturação do conteúdo (`<header>`, `<main>`, `<footer>`, `<nav>`, `<template>`).
+* **CSS3:**
+    * **Variáveis CSS (Custom Properties):** Para gerenciamento de temas (Design System).
+    * **Flexbox e Grid Layout:** Para construção de layouts responsivos e complexos.
+    * **Media Queries:** Para adaptação a múltiplos dispositivos.
+* **JavaScript (ES6+):**
+    * Manipulação do DOM.
+    * **Fetch API:** Para consumo da API ViaCEP.
+    * **History API:** Para gerenciamento do roteamento da SPA.
+    * **Web Storage (localStorage):** Para persistência do tema (Dark Mode).
 
-### Conclusão
+## 🚀 Como Executar o Projeto Localmente
 
-A entrega III garante que o site do Projeto Nova Toca é **dinâmico, interativo e modular**, mantendo a excelência em responsividade e consistência visual. A transição para o modelo SPA e a validação avançada dos formulários simulam de forma eficaz uma aplicação web real.
+Você precisará do [Git](https://git-scm.com/) e de um editor de código como o [VS Code](https://code.visualstudio.com/) com a extensão **Live Server** para rodar este projeto.
+
+1.  **Clone este repositório:**
+    ```bash
+    git clone [https://github.com/jhowbraian/atividade4_ong_nova_toca.git](https://github.com/jhowbraian/atividade4_ong_nova_toca.git)
+    ```
+
+2.  **Navegue até a pasta do projeto:**
+    ```bash
+    cd atividade4_ong_nova_toca
+    ```
+
+3.  **Inicie o projeto com um servidor local:**
+    * Abra a pasta do projeto no VS Code.
+    * Clique com o botão direito no arquivo `index.html`.
+    * Selecione a opção `Open with Live Server` (Abrir com Live Server).
+
+> **Nota Importante:** O projeto **precisa** ser executado a partir de um servidor local (como o Live Server) e não apenas abrindo o `index.html` diretamente no navegador. Isso é necessário para que o roteamento da SPA (Single Page Application) e a integração com a API do ViaCEP funcionem corretamente.
+
+## 🎯 Requisitos da Atividade IV Atendidos
+
+Esta entrega focou em profissionalizar o projeto, atendendo aos seguintes requisitos:
+
+### 1. Controle de Versão com Git/GitHub
+
+* **GitFlow:** O projeto foi gerenciado seguindo uma estratégia de **GitFlow simplificada**, com branches `main` (produção), `develop` (desenvolvimento) e `feature/*` (novas funcionalidades).
+* **Commits Semânticos:** O histórico de commits segue o padrão **[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)** (ex: `feat:`, `fix:`, `refactor:`, `style:`, `docs:`) para um histórico claro e organizado.
+* **Versionamento:** O projeto utiliza **Versionamento Semântico (SemVer)**, com a versão `1.0.0` representando a primeira entrega estável.
+
+### 2. Acessibilidade (WCAG 2.1 Nível AA)
+
+O site foi desenvolvido com foco na conformidade **WCAG 2.1 (Nível AA)**:
+
+* **⌨️ Navegação por Teclado:** Todos os elementos interativos (links, botões, campos de formulário) são 100% acessíveis via teclado (`Tab`), com estados de `:focus` visíveis e claros.
+* **📈 Estrutura Semântica:** Uso correto de tags HTML5 para estruturação de conteúdo, permitindo que leitores de tela entendam a hierarquia da página.
+* **👓 Alto Contraste:** As cores do Design System (tanto no modo claro quanto no escuro) foram verificadas para garantir um **contraste mínimo de 4.5:1** para texto normal, corrigindo paletas de cores que falhavam nos testes (como botões com fundo laranja).
+* **🔊 Leitores de Tela (ARIA):**
+    * Implementação de atributos ARIA (`aria-expanded`, `aria-controls`, `aria-label`) para o menu hambúrguer, informando ao usuário se o menu está aberto ou fechado.
+    * Uso de `role="alert"` e `aria-live="assertive"` para mensagens de feedback do formulário, garantindo que sejam lidas automaticamente.
+    * Gerenciamento de foco na navegação SPA, movendo o foco para o título `<h2>` da nova página carregada.
+* **🌙 Tema Escuro Acessível:** O modo escuro foi implementado como um recurso de acessibilidade, respeitando também todas as regras de contraste.
+
+### 3. Otimização para Produção
+
+Para o "deploy" em produção (GitHub Pages):
+
+* **🖼️ Compressão de Imagens:** Todas as imagens `.jpg` e `.png` do projeto foram otimizadas (via [TinyPNG](https://tinypng.com/)) para reduzir o tempo de carregamento.
+* **📦 Minificação:** Os arquivos CSS (`styler.css`) e JavaScript (`main.js`) foram minificados para reduzir o tamanho dos arquivos, otimizando o *parse time* do navegador.
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Jônatas Braian** como atividade prática para o curso de Análise e Desenvolvimento de Sistemas.
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT.
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
